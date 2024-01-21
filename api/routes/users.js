@@ -1,30 +1,55 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 const imageUploader = require("../../utils/multer_util");
 const router = express.Router();
 
+const env = require("../../env.json")
 const pool = require("../../database/index");
 
 router.get("/", async (req, res, next) => {
     const body = req.body;
-    if (body.mail == null || body.password == null) {
+    const mail = body.mail;
+    const password = body.password;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword);
+    if (mail == null || password == null) {
         res.status(400).json({
             "error": "Invalid request",
             "message": "Mail and password must be provided in the request body."
         })
         return;
     }
-    const [user, fields] = await pool.query(
-        'SELECT * FROM `users` WHERE mail = ? AND password = ?', [body.mail, body.password]
+    const [users, fields] = await pool.query(
+        'SELECT * FROM `users` WHERE mail = ?', [mail]
     );
-    if (user.length == 0) {
+    if (users[0] == null) {
         res.status(401).json({
-            "error": "Invalid account",
-            "message": "There is no matching account with the given mail and password in users"
+            "error": "Invalid Mail",
+            "message": "There is no matching account with the given mail in users"
         })
         return;
     }
-    res.status(200).json(user);
+
+    const isPasswordMatch = bcrypt.compareSync(password, users[0].password);
+    
+    if (!isPasswordMatch) {
+        res.status(401).json({
+            "error": "Invalid Password",
+            "message": "The password given does not match with this account's email address"
+        })
+        return;
+    }
+    delete users[0]["password"];
+
+    const token = jwt.sign({
+        mail: users[0].mail,
+        userId: users[0].id
+    }, env.JWT_KEY, {expiresIn: "1h"});
+
+    users[0].authToken = token;
+
+    res.status(200).json(users[0]);
 });
 
 router.post("/", imageUploader.single('profileImage'),async (req, res, next) => {
@@ -50,7 +75,7 @@ router.post("/", imageUploader.single('profileImage'),async (req, res, next) => 
         return;
     }
     const sql = "INSERT INTO users(photoPath, name,mail,password) value(?,?,?,?)";
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = bcrypt.hashSync(password, 10);
     const [rows, fields] = await pool.query(sql, [req.file.path,name, mail,hashedPassword]);
     res.status(200).json({
         "success": "User created"
