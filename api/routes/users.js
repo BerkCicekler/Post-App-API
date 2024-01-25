@@ -76,7 +76,7 @@ router.post("/", imageUploader.single('profileImage'),async (req, res, next) => 
     }
     const sql = "INSERT INTO users(photoPath, name,mail,password) value(?,?,?,?)";
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const [rows, fields] = await pool.query(sql, [req.file.path,name, mail,hashedPassword]);
+    const [rows, fields] = await pool.query(sql, [req.file != null ? req.file.path : '',name, mail,hashedPassword]);
     res.status(200).json({
         "success": "User created"
     });

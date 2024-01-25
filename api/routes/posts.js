@@ -14,7 +14,7 @@ router.post("/", imageUploader.single('image'), checkAuth,async (req, res, next)
     const body = req.body;
     const title = body.title;
     const context = body.context;
-    const filePath = req.file.path;
+    const filePath = req.file != null ? req.file.path : '';
     const sql = "INSERT INTO posts(title, context, imagePath) value(?,?,?)";
     const [rows, fields] = await pool.query(sql, [title, context, filePath]);
     res.status(200).json({
