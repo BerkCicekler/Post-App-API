@@ -30,10 +30,11 @@ http://localhost:3000/users
 ##### Responde(200)
 ```JSON
 {
-    "id": 11,
-    "photoPath": "uploads\\WİRO 2.png",
-    "name": "Berk",
-    "mail": "berk@gmail.com"
+    "id": 15,
+    "photoPath": "uploads\\2024-01-24T23-02-48.108Z.jpg",
+    "name": "Berk Test",
+    "mail": "berktest@gmail.com",
+    "authToken": "token"
 }
 ```
 
@@ -46,8 +47,7 @@ http://localhost:3000/users
   "name": "Berk Cicekler",
   "mail": "berk@gmail.com",
   "password": "password123",
-  "profileImage": "(jpeg/png file)",
-  "token": "authToken"
+  "profileImage": "(jpeg/png file)"
 }
 ```
 ##### Status
