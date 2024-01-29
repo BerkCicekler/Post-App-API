@@ -11,9 +11,7 @@ router.get("/", async (req, res, next) => {
     const body = req.body;
     const mail = body.mail;
     const password = body.password;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
-    if (mail == null || password == null) {
+    if (mail == undefined || password == undefined) {
         res.status(400).json({
             "error": "Invalid request",
             "message": "Mail and password must be provided in the request body."
@@ -57,7 +55,7 @@ router.post("/", imageUploader.single('profileImage'),async (req, res, next) => 
     const name = body.name;
     const mail = body.mail;
     const password = body.password;
-    if (name == null || mail == null || password == null) {
+    if (name == undefined || mail == undefined || password == undefined) {
         res.status(400).json({
             "error": "Invalid request",
             "message": "All there parameters must be given in the body"
