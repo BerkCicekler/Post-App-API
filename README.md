@@ -18,7 +18,7 @@ http://localhost:3000/users
 ```
 ```JSON
 {
-  "main": "example@gmail.com",
+  "mail": "example@gmail.com",
   "password": "examplePassword",
 }
 ```
@@ -61,15 +61,17 @@ http://localhost:3000/posts/(startIndex)
 ```
 ```JSON
 [
-    {
-        "id": 2,
-        "title": "post title",
-        "context": "This is the context of this post",
-        "imagePath": "uploads\new.png",
-        "userId": 1,
-        "userPhoto": "uploads\berk.png",
-        "userName": "Berk Cicekler"
+  {
+    "id": 2,
+    "title": "post title",
+    "context": "This is the context of this post",
+    "imagePath": "uploads\new.png",
+    "senderUser": {
+      "userId": 1,
+      "userPhoto": "uploads\berk.png",
+      "userName": "Berk Cicekler"
     }
+  }
 ]
 ```
 #### Posts (POST)

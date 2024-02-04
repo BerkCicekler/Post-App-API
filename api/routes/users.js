@@ -30,7 +30,6 @@ router.get("/", async (req, res, next) => {
     }
 
     const isPasswordMatch = bcrypt.compareSync(password, users[0].password);
-    
     if (!isPasswordMatch) {
         res.status(401).json({
             "error": "Invalid Password",
@@ -42,7 +41,7 @@ router.get("/", async (req, res, next) => {
 
     const token = jwt.sign({
         mail: users[0].mail,
-        userId: users[0].id
+        id: users[0].id
     }, env.JWT_KEY, {expiresIn: "1h"});
 
     users[0].authToken = token;
