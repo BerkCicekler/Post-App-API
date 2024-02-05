@@ -1,12 +1,22 @@
 # Post App API
-Its a basic Restful API coded with NodeJS for my flutter project
+Its a basic Restful API coded with NodeJS for my flutter project [postapp](https://github.com/BerkCicekler/postapp/blob/main/README.md)
 
 ## Features
-User log-in
-User Sign-in
-Post send
-Image storage
-Auth Token
+User Log-in <br>
+User Sign-in <br>
+Send post <br>
+Image Storage <br>
+Auth Token <br>
+
+## dependencies
+[express](https://www.npmjs.com/package/express) <br>
+[bcrypt](https://www.npmjs.com/package/bcrypt?activeTab=readme) <br>
+[body-parser](https://www.npmjs.com/package/body-parser) <br>
+[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) <br>
+[morgan](https://www.npmjs.com/package/morgan) <br>
+[multer](https://www.npmjs.com/package/multer) <br>
+[mysql2](https://www.npmjs.com/package/mysql2) <br>
+
 
 ## Documentation
 
