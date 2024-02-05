@@ -63,7 +63,6 @@ http://localhost:3000/posts/(startIndex)
 [
   {
     "id": 2,
-    "title": "post title",
     "context": "This is the context of this post",
     "imagePath": "uploads\new.png",
     "senderUser": {
@@ -80,7 +79,6 @@ http://localhost:3000/posts/
 ```
 ```JSON
 {
-  "title": "Example title",
   "context": "Example context",
   "image": "(jpeg/png image)",
   "token": "auth token"

@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL DEFAULT '',
   `context` varchar(50) NOT NULL DEFAULT '',
   `imagePath` varchar(50) NOT NULL DEFAULT '',
   `userId` int(11) NOT NULL DEFAULT 0,
