@@ -3,7 +3,7 @@ USE `restfulapi`;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `photoPath` varchar(200) DEFAULT '',
+  `photoPath` varchar(50) DEFAULT '',
   `name` varchar(50) NOT NULL DEFAULT '',
   `mail` varchar(50) NOT NULL DEFAULT '',
   `password` varchar(150) NOT NULL DEFAULT '',
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `context` varchar(50) NOT NULL DEFAULT '',
+  `context` varchar(255) NOT NULL DEFAULT '',
   `imagePath` varchar(50) NOT NULL DEFAULT '',
   `userId` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)

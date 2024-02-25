@@ -12,11 +12,11 @@ router.get("/:start", async (req, res, next) => {
         return {
             id: row.id,
             context: row.context,
-            imagePath: row.imagePath,
+            imagePath: row.imagePath != "" ? "http://" + req.get('host') + "/" + row.imagePath : "" ,
             senderUser: {
-            userId: row.userId,
-            userPhoto: row.userPhoto,
-            userName: row.userName
+            id: row.userId,
+            photoPath: row.userPhoto != "" ? "http://" + req.get('host') + "/" + row.userPhoto : "",
+            name: row.userName
         }
         };
     });
@@ -30,7 +30,7 @@ router.post("/", imageUploader.single('image'), checkAuth,async (req, res, next)
     const userData = req.userData;
     const filePath = req.file != null ? req.file.path : '';
     const sql = "INSERT INTO posts(context, imagePath, userId) value(?,?,?)";
-    const [rows, fields] = await pool.query(sql, [title, context, filePath, userData.id]);
+    const [rows, fields] = await pool.query(sql, [context, filePath, userData.id]);
     res.status(200).json({
         "success": "post created"
     });

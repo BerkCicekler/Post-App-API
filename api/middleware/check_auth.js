@@ -4,7 +4,7 @@ const env = require("../../env.json")
 
 module.exports = (req, res, next) => {
     try {
-        const decoded = jwt.verify(req.body.token, env.JWT_KEY);
+        const decoded = jwt.verify(req.headers["token"], env.JWT_KEY);
         req.userData = decoded;
     }catch {
         return res.status(401).json({
