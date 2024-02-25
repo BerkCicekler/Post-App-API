@@ -76,9 +76,9 @@ http://localhost:3000/posts/(startIndex)
     "context": "This is the context of this post",
     "imagePath": "uploads\new.png",
     "senderUser": {
-      "userId": 1,
-      "userPhoto": "uploads\berk.png",
-      "userName": "Berk Cicekler"
+      "id": 1,
+      "photoPath": "uploads\berk.png",
+      "name": "Berk Cicekler"
     }
   }
 ]
