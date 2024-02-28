@@ -5,7 +5,7 @@ const imageUploader = require("../../utils/multer_util");
 const checkAuth = require("../middleware/check_auth");
 
 router.get("/:start", async (req, res, next) => {
-    const sql = `SELECT posts.id, posts.context, posts.imagePath, posts.userId, users.photoPath as 'userPhoto',  users.name as 'userName' FROM posts INNER JOIN users ON posts.userId = users.id ORDER BY posts.id DESC LIMIT 20 OFFSET ?`;
+    const sql = `SELECT posts.id, posts.context, posts.imagePath, posts.userId, users.photoPath as 'userPhoto',  users.name as 'userName' FROM posts INNER JOIN users ON posts.userId = users.id ORDER BY posts.id DESC LIMIT 10 OFFSET ?`;
     const [rows, fields] = await pool.query(sql, [parseInt(req.params.start)]);
 
     const transformedRows = rows.map(row => {
